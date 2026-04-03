@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ЧИСТАПРО | О нас</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fefefe;
+            color: #1a2a1f;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-fade-up {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animate-fade-left {
+            opacity: 0;
+            animation: fadeInLeft 0.8s ease forwards;
+        }
+
+        .animate-fade-right {
+            opacity: 0;
+            animation: fadeInRight 0.8s ease forwards;
+        }
+
+        .animate-zoom {
+            opacity: 0;
+            animation: zoomIn 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        /* Кнопки */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 14px 32px;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #2c7a4d;
+            color: white;
+            box-shadow: 0 6px 20px rgba(44, 122, 77, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #1f5a38;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(44, 122, 77, 0.4);
+        }
+
+        .btn-outline {
+            border: 2px solid #2c7a4d;
+            color: #2c7a4d;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: #2c7a4d;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-light {
+            background: white;
+            color: #2c7a4d;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-light:hover {
+            background: #f0f7f2;
+            transform: translateY(-2px);
+        }
+
+        /* Шапка */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            text-decoration: none;
+            color: #1a2a1f;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo span {
+            color: #2c7a4d;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2d3e2f;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #2c7a4d;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #2c7a4d;
+        }
+
+        /* Hero секция */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            padding: 40px 0 70px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-badge {
+            background: #e9f5ef;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #2c7a4d;
+            margin-bottom: 28px;
+            animation: pulse 2s infinite;
+        }
+
+        .hero-content h1 {
+            font-size: 3.6rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #1a2e22;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #5a6b55;
+            max-width: 550px;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .hero-image {
+            flex: 1;
+            background: linear-gradient(135deg, #d9f0e3, #c2e0d0);
+            border-radius: 60px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+        .hero-image:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image i {
+            font-size: 200px;
+            color: #2c7a4d;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Секция истории */
+        .history {
+            padding: 70px 0;
+            background: #f9fcf8;
+            border-radius: 60px;
+            margin: 20px 0;
+        }
+
+        .history-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .history-text {
+            flex: 1;
+        }
+
+        .history-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #1a2e22;
+        }
+
+        .history-text p {
+            color: #5a6b55;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .history-image {
+            flex: 1;
+            background: linear-gradient(135deg, #e0f0e8, #c8e0d4);
+            border-radius: 48px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .history-image i {
+            font-size: 180px;
+            color: #2c7a4d;
+        }
+
+        /* Миссия и ценности */
+        .mission {
+            padding: 70px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #6b7a66;
+            max-width: 650px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            background: white;
+            border-radius: 32px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s;
+            border: 1px solid #eef3ea;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(44, 122, 77, 0.12);
+        }
+
+        .value-card i {
+            font-size: 52px;
+            color: #2c7a4d;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .value-card:hover i {
+            transform: scale(1.1);
+        }
+
+        .value-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            color: #6b7a66;
+            line-height: 1.5;
+        }
+
+        /* Команда */
+        .team {
+            background: #f9fcf8;
+            padding: 70px 0;
+            border-radius: 60px;
+            margin: 20px 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            margin-top: 40px;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 32px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: all 0.4s;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(44, 122, 77, 0.12);
+        }
+
+        .team-avatar {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, #2c7a4d, #4cae6c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            transition: transform 0.3s;
+        }
+
+        .team-card:hover .team-avatar {
+            transform: scale(1.05);
+        }
+
+        .team-avatar i {
+            font-size: 70px;
+            color: white;
+        }
+
+        .team-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .team-position {
+            color: #2c7a4d;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .team-desc {
+            color: #6b7a66;
+            line-height: 1.5;
+        }
+
+        /* Достижения */
+        .achievements {
+            padding: 70px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 30px;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #2c7a4d;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #5a6b55;
+            font-weight: 500;
+        }
+
+        /* Отзывы */
+        .reviews {
+            background: #f9fcf8;
+            padding: 70px 0;
+            border-radius: 60px;
+            margin: 20px 0;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 28px;
+            padding: 32px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        .review-text {
+            color: #4a5a45;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: #2c7a4d;
+        }
+
+        /* CTA секция */
+        .cta {
+            background: linear-gradient(135deg, #2c7a4d, #1f5a38);
+            border-radius: 60px;
+            padding: 60px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .cta h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .cta .btn-light {
+            background: white;
+            color: #2c7a4d;
+            font-size: 1.1rem;
+            padding: 16px 40px;
+        }
+
+        .cta .btn-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Футер */
+        footer {
+            background: #1c2a1a;
+            color: #cde2c4;
+            padding: 50px 0 30px;
+            border-radius: 50px 50px 0 0;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .socials {
+            display: flex;
+            gap: 20px;
+        }
+
+        .socials i {
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .socials i:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e2a22;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            z-index: 1100;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        @media (max-width: 860px) {
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+            .navbar {
+                flex-direction: column;
+            }
+            .cta {
+                padding: 40px 20px;
+            }
+            .hero-image i {
+                font-size: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Шапка -->
+        <nav class="navbar">
+            <a href="index.html" class="logo">ЧИСТА<span>ПРО</span></a>
+            <div class="nav-links">
+                <a href="./Главная Страница.html">Главная</a>
+                <a href="./услуги.html">Услуги</a>
+                <a href="./О нас.html" style="color: #2c7a4d; font-weight: 600;">О нас</a>
+                <a href="./Отзывы.html">Отзывы</a>
+                <a href="./Контакты.html">Контакты</a>
+                
+            </div>
+        </nav>
+
+        <!-- Hero секция -->
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-badge animate-fade-left">
+                    <i class="fas fa-heart"></i> О компании
+                </div>
+                <h1 class="animate-fade-left delay-1">Заботимся о чистоте<br>с 2018 года</h1>
+                <p class="animate-fade-left delay-2">ЧИСТАПРО — это команда профессионалов, которые превращают уборку в искусство. Мы создаем идеальную чистоту, чтобы вы могли наслаждаться комфортом.</p>
+                <div class="animate-fade-left delay-3">
+                </div>
+            </div>
+            <div class="hero-image animate-fade-right">
+                <i class="fas fa-hand-sparkles"></i>
+            </div>
+        </div>
+
+        <!-- История компании -->
+        <div class="history">
+            <div class="history-content">
+                <div class="history-text animate-fade-left">
+                    <h2>Наша история</h2>
+                    <p>Компания ЧИСТАПРО была основана в 2018 году с простой идеей: сделать профессиональную уборку доступной и качественной для каждого. Начинали с небольшой команды из 3 человек, а сегодня мы — более 50 профессиональных клинеров, которые ежедневно дарят чистоту сотням семей и бизнесов.</p>
+                    <p>За 7 лет работы мы провели более 15 000 уборок, получили сотни благодарственных отзывов и стали одним из лидеров клинингового рынка. Наш секрет — в любви к своему делу и внимании к деталям.</p>
+                </div>
+                <div class="history-image animate-fade-right">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Миссия и ценности -->
+        <div class="mission">
+            <h2 class="section-title animate-fade-up">Наша миссия и ценности</h2>
+            <div class="section-sub animate-fade-up delay-1">То, что нас вдохновляет каждый день</div>
+            <div class="values-grid">
+                <div class="value-card animate-zoom delay-1">
+                    <i class="fas fa-heart"></i>
+                    <h3>Забота о клиентах</h3>
+                    <p>Мы относимся к каждому клиенту с вниманием и уважением, учитываем все пожелания и особенности.</p>
+                </div>
+                <div class="value-card animate-zoom delay-2">
+                    <i class="fas fa-medal"></i>
+                    <h3>Качество и надежность</h3>
+                    <p>Используем только профессиональные средства и технологии. Даем 100% гарантию на результат.</p>
+                </div>
+                <div class="value-card animate-zoom delay-3">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Экологичность</h3>
+                    <p>Применяем гипоаллергенные, безопасные для людей и окружающей среды средства.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Команда -->
+        <div class="team">
+            <h2 class="section-title animate-fade-up">Наша команда</h2>
+            <div class="section-sub animate-fade-up delay-1">Лучшие специалисты клинингового дела</div>
+            <div class="team-grid">
+                <div class="team-card animate-fade-up delay-1">
+                    <div class="team-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Александра Волкова</h3>
+                    <div class="team-position">Основатель и директор</div>
+                    <p class="team-desc">Более 10 лет в сфере клининга. Создала компанию с нуля и сформировала команду профессионалов.</p>
+                </div>
+                <div class="team-card animate-fade-up delay-2">
+                    <div class="team-avatar">
+                        <i class="fas fa-chalkboard-user"></i>
+                    </div>
+                    <h3>Дмитрий Морозов</h3>
+                    <div class="team-position">Руководитель отдела качества</div>
+                    <p class="team-desc">Отвечает за стандарты уборки, обучение персонала и контроль качества услуг.</p>
+                </div>
+                <div class="team-card animate-fade-up delay-3">
+                    <div class="team-avatar">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                    <h3>Елена Соколова</h3>
+                    <div class="team-position">Старший клинер-эксперт</div>
+                    <p class="team-desc">Сертифицированный специалист по химчистке и сложным видам уборки. Обучает новых сотрудников.</p>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Достижения -->
+        <div class="achievements">
+            <h2 class="section-title animate-fade-up">Наши достижения</h2>
+            <div class="section-sub animate-fade-up delay-1">Цифры, которые говорят сами за себя</div>
+            <div class="stats-grid">
+                <div class="stat-item animate-zoom delay-1">
+                    <div class="stat-number">7+</div>
+                    <div class="stat-label">лет на рынке</div>
+                </div>
+                <div class="stat-item animate-zoom delay-2">
+                    <div class="stat-number">15 000+</div>
+                    <div class="stat-label">выполненных уборок</div>
+                </div>
+                <div class="stat-item animate-zoom delay-3">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">профессиональных клинеров</div>
+                </div>
+                <div class="stat-item animate-zoom delay-4">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">довольных клиентов</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Отзывы клиентов -->
+        <div class="reviews">
+            <h2 class="section-title animate-fade-up">Что говорят о нас</h2>
+            <div class="section-sub animate-fade-up delay-1">Мнение наших клиентов — лучшая награда</div>
+            <div class="reviews-grid">
+                <div class="review-card animate-fade-up delay-1">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"Обращаюсь в ЧИСТАПРО уже второй год. Всегда идеальная чистота, вежливые сотрудники. Особенно радует, что используют безопасные средства — для моей аллергии это важно."</p>
+                    <div class="review-author">— Ирина Петрова</div>
+                </div>
+                <div class="review-card animate-fade-up delay-2">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"Заказывали уборку офиса после ремонта. Сделали всё быстро и качественно. Отдельное спасибо за внимательность к деталям — даже труднодоступные места вычистили идеально."</p>
+                    <div class="review-author">— Сергей, директор "БизнесГрупп"</div>
+                </div>
+                <div class="review-card animate-fade-up delay-3">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"Профессионалы своего дела! Заказывали химчистку дивана — результат превзошел ожидания. Старый диван выглядит как новый. Спасибо команде ЧИСТАПРО!"</p>
+                    <div class="review-author">— Михаил Смирнов</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA секция -->
+        
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">ЧИСТА<span style="color:#a5d6a5;">ПРО</span></div>
+            <div>© 2026 Клининговая служба. Все права защищены.</div>
+            <div class="socials">
+                <i class="fab fa-whatsapp"></i>
+                <i class="fab fa-telegram"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-vk"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно -->
+    <div id="modal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(5px)">
+        <div style="background: white; max-width: 450px; width: 90%; border-radius: 40px; padding: 40px 30px; text-align: center;">
+            <i class="fas fa-check-circle" style="font-size: 65px; color: #2c7a4d; margin-bottom: 20px;"></i>
+            <h3 id="modalTitle" style="font-size: 1.8rem; margin-bottom: 12px;">Спасибо!</h3>
+            <p id="modalMessage" style="margin-bottom: 28px; color: #4a5b4c;">Ваша заявка принята. Менеджер свяжется с вами в ближайшее время.</p>
+            <button id="closeModal" style="background: #2c7a4d; border: none; padding: 12px 28px; border-radius: 40px; color: white; font-weight: bold; cursor: pointer;">Отлично, закрыть</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const toast = document.getElementById('toast');
+
+        function showModal(title, message) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerHTML = message;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function showToast(text) {
+            toast.innerText = text;
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2500);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Кнопка "Связаться"
+            document.getElementById('callbackBtn').addEventListener('click', () => {
+                showModal('Свяжитесь с нами', '<i class="fas fa-phone"></i> +7 (999) 123-45-67<br><i class="fab fa-whatsapp"></i> WhatsApp: +7 (999) 123-45-67<br><i class="fab fa-telegram"></i> Telegram: @chistapro<br>Или оставьте заявку на сайте!');
+            });
+
+            // Кнопка "Заказать уборку"
+            const orderBtns = [document.getElementById('orderBtn'), document.getElementById('ctaOrderBtn')];
+            orderBtns.forEach(btn => {
+                if (btn) {
+                    btn.addEventListener('click', () => {
+                        showModal('Заказ уборки', '📋 Для оформления заказа позвоните нам:<br><i class="fas fa-phone"></i> +7 (999) 123-45-67<br><br>Или оставьте заявку на главной странице!');
+                    });
+                }
+            });
+
+            // Закрытие модалки
+            document.getElementById('closeModal').addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            // Социальные иконки
+            document.querySelectorAll('.socials i').forEach(icon => {
+                icon.addEventListener('click', () => {
+                    showToast('📱 Мы в соцсетях! Скоро свяжемся с вами');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

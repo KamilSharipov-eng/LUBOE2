@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ЧИСТАПРО | Услуги клининга</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fefefe;
+            color: #1a2a1f;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-fade-up {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animate-fade-left {
+            opacity: 0;
+            animation: fadeInLeft 0.8s ease forwards;
+        }
+
+        .animate-fade-right {
+            opacity: 0;
+            animation: fadeInRight 0.8s ease forwards;
+        }
+
+        .animate-zoom {
+            opacity: 0;
+            animation: zoomIn 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1s; }
+
+        /* Кнопки */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 14px 32px;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #2c7a4d;
+            color: white;
+            box-shadow: 0 6px 20px rgba(44, 122, 77, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #1f5a38;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(44, 122, 77, 0.4);
+        }
+
+        .btn-outline {
+            border: 2px solid #2c7a4d;
+            color: #2c7a4d;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: #2c7a4d;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-light {
+            background: white;
+            color: #2c7a4d;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-light:hover {
+            background: #f0f7f2;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(44, 122, 77, 0.15);
+        }
+
+        /* Шапка */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            text-decoration: none;
+            color: #1a2a1f;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo span {
+            color: #2c7a4d;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2d3e2f;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #2c7a4d;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #2c7a4d;
+        }
+
+        /* Hero секция */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            padding: 40px 0 70px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-badge {
+            background: #e9f5ef;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #2c7a4d;
+            margin-bottom: 28px;
+            animation: pulse 2s infinite;
+        }
+
+        .hero-content h1 {
+            font-size: 3.6rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #1a2e22;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #5a6b55;
+            max-width: 550px;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .hero-image {
+            flex: 1;
+            background: linear-gradient(135deg, #d9f0e3, #c2e0d0);
+            border-radius: 60px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+        .hero-image:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image i {
+            font-size: 200px;
+            color: #2c7a4d;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Категории услуг */
+        .categories {
+            padding: 20px 0 40px;
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .category-btn {
+            padding: 12px 28px;
+            border-radius: 50px;
+            background: white;
+            border: 2px solid #e0e8dc;
+            font-weight: 600;
+            color: #5a6b55;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .category-btn:hover {
+            border-color: #2c7a4d;
+            color: #2c7a4d;
+            transform: translateY(-2px);
+        }
+
+        .category-btn.active {
+            background: #2c7a4d;
+            border-color: #2c7a4d;
+            color: white;
+        }
+
+        /* Сетка услуг */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s;
+            border: 1px solid #eef3ea;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(44, 122, 77, 0.12);
+        }
+
+        .service-icon {
+            background: linear-gradient(135deg, #e9f5ef, #d9f0e3);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .service-icon i {
+            font-size: 70px;
+            color: #2c7a4d;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover .service-icon i {
+            transform: scale(1.1);
+        }
+
+        .service-info {
+            padding: 28px;
+        }
+
+        .service-info h3 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: #1a2e22;
+        }
+
+        .service-description {
+            color: #6b7a66;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .service-features li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #5a6b55;
+            font-size: 0.95rem;
+        }
+
+        .service-features i {
+            color: #2c7a4d;
+            font-size: 0.9rem;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #eef3ea;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #2c7a4d;
+        }
+
+        .price-note {
+            font-size: 0.85rem;
+            color: #8b9a86;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #6b7a66;
+            max-width: 650px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 450px;
+            width: 90%;
+            border-radius: 40px;
+            padding: 40px 30px;
+            text-align: center;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .modal-content i {
+            font-size: 65px;
+            color: #2c7a4d;
+            margin-bottom: 20px;
+        }
+
+        .modal-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .modal-content p {
+            margin-bottom: 28px;
+            color: #4a5b4c;
+        }
+
+        .close-modal-btn {
+            background: #2c7a4d;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* CTA секция */
+        .cta {
+            background: linear-gradient(135deg, #2c7a4d, #1f5a38);
+            border-radius: 60px;
+            padding: 60px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .cta h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .cta .btn-light {
+            background: white;
+            color: #2c7a4d;
+            font-size: 1.1rem;
+            padding: 16px 40px;
+        }
+
+        .cta .btn-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Футер */
+        footer {
+            background: #1c2a1a;
+            color: #cde2c4;
+            padding: 50px 0 30px;
+            border-radius: 50px 50px 0 0;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .socials {
+            display: flex;
+            gap: 20px;
+        }
+
+        .socials i {
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .socials i:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e2a22;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            z-index: 1100;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        @media (max-width: 860px) {
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+            .navbar {
+                flex-direction: column;
+            }
+            .cta {
+                padding: 40px 20px;
+            }
+            .hero-image i {
+                font-size: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Шапка -->
+        <nav class="navbar">
+            <a href="index.html" class="logo">ЧИСТА<span>ПРО</span></a>
+            <div class="nav-links">
+                <a href="./Главная Страница.html">Главная</a>
+                <a href="./услуги.html" style="color: #2c7a4d; font-weight: 600;">Услуги</a>
+                <a href="./О нас.html">О нас</a>
+                <a href="./Отзывы.html">Отзывы</a>
+                <a href="./Контакты.html">Контакты</a>
+            </div>
+        </nav>
+
+        <!-- Hero секция -->
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-badge animate-fade-left">
+                    <i class="fas fa-sparkles"></i> Наши услуги
+                </div>
+                <h1 class="animate-fade-left delay-1">Профессиональный<br>клининг для любого<br>пространства</h1>
+                <p class="animate-fade-left delay-2">Выберите идеальный вариант уборки для вашего дома или офиса. Работаем с любыми площадями и сложностями.</p>
+            </div>
+            <div class="hero-image animate-fade-right">
+                <i class="fas fa-broom-ball"></i>
+            </div>
+        </div>
+
+        <!-- Категории услуг -->
+        <div class="categories">
+            <div class="category-tabs">
+                <button class="category-btn active" data-category="all">Все услуги</button>
+                <button class="category-btn" data-category="home">Для дома</button>
+                <button class="category-btn" data-category="office">Для офиса</button>
+                <button class="category-btn" data-category="special">Специальные</button>
+            </div>
+        </div>
+
+        <!-- Основные услуги -->
+        <div class="services-grid" id="servicesGrid">
+            <!-- Услуги будут загружены динамически через JS -->
+        </div>
+
+        <!-- CTA секция -->
+        <div class="cta animate-fade-up">
+            <h2>Нужна консультация?</h2>
+            <p>Наши специалисты помогут подобрать идеальный вариант уборки под ваш бюджет</p>
+            <button class="btn btn-light" id="consultBtn"><i class="fas fa-comments"></i> Получить консультацию</button>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">ЧИСТА<span style="color:#a5d6a5;">ПРО</span></div>
+            <div>© 2026 Клининговая служба. Все права защищены.</div>
+            <div class="socials">
+                <i class="fab fa-whatsapp"></i>
+                <i class="fab fa-telegram"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-vk"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <i class="fas fa-check-circle"></i>
+            <h3 id="modalTitle">Спасибо!</h3>
+            <p id="modalMessage">Ваша заявка принята. Менеджер свяжется с вами в ближайшее время.</p>
+            <button class="close-modal-btn" id="closeModal">Отлично, закрыть</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const toast = document.getElementById('toast');
+
+        function showModal(title, message) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerHTML = message;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function showToast(text) {
+            toast.innerText = text;
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2500);
+        }
+
+        // Данные услуг
+        const services = [
+            { category: 'home', name: 'Квартирная уборка', icon: 'fas fa-home', desc: 'Регулярная, генеральная или после ремонта. Безопасные средства и профессиональное оборудование.', features: ['Уборка всех комнат', 'Мойка полов и поверхностей', 'Вынос мусора', 'Чистка санузлов'], price: '2 490', note: 'за 1-комнатную квартиру' },
+            { category: 'home', name: 'Уборка коттеджей', icon: 'fas fa-tree', desc: 'Комплексная уборка загородных домов любой площади. Работаем с бассейнами и придомовой территорией.', features: ['Уборка всех этажей', 'Мойка фасадов', 'Чистка бассейна', 'Уход за территорией'], price: '7 990', note: 'от 100м²' },
+            { category: 'office', name: 'Офисный клининг', icon: 'fas fa-building', desc: 'Ежедневная, поддерживающая или комплексная уборка офисов. Работаем в нерабочее время.', features: ['Уборка рабочих мест', 'Мойка полов и окон', 'Чистка кухни', 'Вынос мусора'], price: '4 900', note: 'за офис до 50м²' },
+            { category: 'office', name: 'Уборка ТЦ и магазинов', icon: 'fas fa-store', desc: 'Профессиональная уборка торговых центров, магазинов, витрин. Работаем ночью.', features: ['Мытье витрин', 'Уборка торговых залов', 'Чистка подсобных помещений', 'Полировка поверхностей'], price: 'договорная', note: 'индивидуальный расчет' },
+            { category: 'special', name: 'Химчистка мебели', icon: 'fas fa-couch', desc: 'Глубокая очистка мягкой мебели, удаление пятен и запахов. Безопасные средства.', features: ['Выведение пятен', 'Удаление запахов', 'Антибактериальная обработка', 'Быстрая сушка'], price: '1 890', note: 'за 1 предмет' },
+            { category: 'special', name: 'Уборка после ремонта', icon: 'fas fa-hard-hat', desc: 'Полное удаление строительной пыли, мусора. Готово к заселению за 1 день.', features: ['Удаление пыли', 'Мойка окон', 'Чистка вентиляции', 'Вынос строительного мусора'], price: '6 490', note: 'от 1 комнаты' },
+        ];
+
+        // Функция рендеринга услуг
+        function renderServices(category = 'all') {
+            const grid = document.getElementById('servicesGrid');
+            const filtered = category === 'all' ? services : services.filter(s => s.category === category);
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div style="text-align: center; grid-column: 1/-1; padding: 50px;">Услуги в этой категории скоро появятся</div>';
+                return;
+            }
+            
+            grid.innerHTML = filtered.map((service, index) => `
+                <div class="service-card animate-zoom delay-${(index % 5) + 1}">
+                    <div class="service-icon">
+                        <i class="${service.icon}"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>${service.name}</h3>
+                        <p class="service-description">${service.desc}</p>
+                        <ul class="service-features">
+                            ${service.features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}
+                        </ul>
+                        <div class="price-row">
+                            <div class="price">от ${service.price} ₽</div>
+                            <div class="price-note">${service.note}</div>
+                        </div>
+                        <button class="btn btn-primary service-order" data-service="${service.name}" style="width: 100%;"><i class="fas fa-shopping-cart"></i> Заказать услугу</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Добавляем обработчики для кнопок заказа
+            document.querySelectorAll('.service-order').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const serviceName = btn.getAttribute('data-service');
+                    showModal('Заказ услуги', `Вы выбрали услугу "${serviceName}".<br><br>Для оформления заказа позвоните нам:<br><i class="fas fa-phone"></i> +7 (999) 123-45-67<br><i class="fab fa-whatsapp"></i> WhatsApp: +7 (999) 123-45-67<br><br>Или оставьте заявку на главной странице!`);
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Рендерим все услуги
+            renderServices('all');
+
+            // Категории
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const category = btn.getAttribute('data-category');
+                    renderServices(category);
+                });
+            });
+
+            // Кнопка "Получить консультацию"
+            const consultBtn = document.getElementById('consultBtn');
+            if (consultBtn) {
+                consultBtn.addEventListener('click', () => {
+                    showModal('Консультация специалиста', 'Оставьте заявку, и мы перезвоним в течение 15 минут!<br><br><i class="fas fa-phone"></i> +7 (999) 123-45-67<br><i class="fab fa-whatsapp"></i> WhatsApp: +7 (999) 123-45-67');
+                });
+            }
+
+            // Социальные иконки
+            const socialIcons = document.querySelectorAll('.socials i');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('click', () => {
+                    showToast('📱 Мы в соцсетях! Скоро свяжемся с вами');
+                });
+            });
+
+            // Закрытие модалки
+            const closeModalBtn = document.getElementById('closeModal');
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', closeModal);
+            }
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+        });
+    </script>
+</body>
+</html>
